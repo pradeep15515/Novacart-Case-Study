@@ -9,7 +9,11 @@ Tracks:
 - last processed primary key
 - rows written per run
 
-![Bronze Control](../screenshots/bronze_control_table.png)
+
+<img width="2086" height="382" alt="image" src="https://github.com/user-attachments/assets/29093e8f-68a5-4600-a248-bb1165570f9d" />
+<img width="2096" height="358" alt="image" src="https://github.com/user-attachments/assets/c1feaaf2-a551-4a29-9be5-630b48e4846f" />
+
+
 
 ---
 

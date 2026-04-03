@@ -110,7 +110,7 @@ Invalid records are isolated for further review instead of polluting clean datas
 
 Final curated dataset combining all entities for analytics.
 
-![Gold Orders](screenshots/gold_orders_information.png)
+![Gold Orders](screenshots/gold_orders_information-2.png)
 
 ---
 

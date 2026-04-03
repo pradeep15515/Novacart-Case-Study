@@ -71,7 +71,9 @@ Source → Bronze → Silver → Gold → Analytics
 
 ### 🔎 Silver Processing Control
 
-![Silver Control](screenshots/silver_processing_control.png)
+![Silver Control]
+<img width="2992" height="1452" alt="image" src="https://github.com/user-attachments/assets/2848624e-ffbb-4cbb-92a8-04bdbf98358e" />
+
 
 ### ⚠️ Quarantine Example
 

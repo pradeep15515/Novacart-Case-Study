@@ -24,7 +24,7 @@ Additionally implemented workflow orchestration, monitoring with alerts, and das
 
 ## 🏗️ Architecture
 
-![Architecture](architecture/novacart_architecture.png)
+![Architecture](novacart_architecture.png)
 
 
 ### Flow:

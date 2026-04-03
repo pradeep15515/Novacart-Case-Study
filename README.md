@@ -57,7 +57,7 @@ Source → Bronze → Silver → Gold → Dashboard
 
 Tracks incremental ingestion using watermark logic to ensure only new data is processed.
 
-![Bronze Control](screenshots/bronze_control_table.png)
+![Bronze Control](screenshots/bronze_control_tablepng.png)
 (screenshots/bronze_control_table.png)
 
 

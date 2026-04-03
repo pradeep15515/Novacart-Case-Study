@@ -131,3 +131,76 @@ Tracks changes in:
 ---
 
 ## 📁 Project Structure
+novacart-case-study/
+│
+├── notebooks/
+│   ├── 01_bronze_ingestion.py
+│   ├── 02_silver_processing.py
+│   └── 03_gold_processing.py
+│
+├── docs/
+│   ├── project_overview.md
+│   ├── assumptions.md
+│   └── sample_outputs.md
+│
+├── screenshots/
+│   ├── bronze_control_table.png
+│   ├── silver_processing_control.png
+│   ├── gold_orders_information.png
+│   ├── category_performance.png
+│   └── quarantine_examples.png
+│
+└── README.md
+
+---
+
+## ▶️ How to Run
+
+1. Create catalog and schemas in Databricks
+2. Run Bronze ingestion notebook
+3. Run Silver processing notebook
+4. Run Gold processing notebook
+5. Validate using SQL queries
+
+---
+
+## ⚠️ Assumptions
+
+- Source data uses reliable timestamps
+- No hard deletes in source system
+- Categories limited to:
+  - ELECTRONICS
+  - FITNESS
+  - LIFESTYLE
+- Invalid records routed to quarantine
+
+---
+
+## 🚧 Limitations
+
+- No real CDC (timestamp-based only)
+- No orchestration (manual execution)
+- No streaming pipeline
+- No monitoring/alerting framework
+
+---
+
+## 🔮 Future Improvements
+
+- Add Databricks Workflows / Airflow orchestration
+- Implement CDC ingestion
+- Add data quality framework (Great Expectations)
+- Add streaming (Kafka / Event Hub)
+- Schema evolution handling
+
+---
+
+## 💡 Key Takeaways
+
+- Built a production-style data pipeline using Delta Lake
+- Implemented incremental ingestion and control tables
+- Designed data quality and quarantine strategy
+- Developed SCD Type 2 history tracking
+- Delivered business-ready aggregated datasets
+
+---

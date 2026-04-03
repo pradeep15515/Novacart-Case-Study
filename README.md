@@ -193,21 +193,16 @@ Tracks changes in:
 
 ## 📁 Project Structure
 
-
---
-
+```text
 Novacart-Case-Study/
-│
 ├── notebooks/
 │   ├── bronze_ingestion.py
 │   ├── silver_processing.py
 │   └── gold_processing.py
-│
 ├── docs/
 │   ├── project_overview.md
 │   ├── assumptions.md
 │   └── sample_outputs.md
-│
 ├── screenshots/
 │   ├── bronze_control_table.png
 │   ├── silver_processing_control.png
@@ -217,10 +212,9 @@ Novacart-Case-Study/
 │   ├── dashboard.png
 │   ├── workflow.png
 │   └── alerts.png
-│
+├── novacart_architecture.png
 └── README.md
-
----
+```
 
 ## ▶️ How to Run
 

@@ -18,6 +18,7 @@ The pipeline is designed using a **Medallion Architecture**:
 ## 🏗️ Architecture
 
 ![Architecture](architecture/novacart_architecture.png)
+<img width="940" height="764" alt="databricks_architecture" src="https://github.com/user-attachments/assets/34a9862a-e85d-4e08-a478-fbbd2425d229" />
 
 
 

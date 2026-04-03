@@ -135,6 +135,54 @@ Tracks changes in:
 - Idempotent pipeline (safe re-runs)
 
 ---
+## 📊 Additional Implementations
+
+### 📈 Dashboard (Analytics Layer)
+
+- Built dashboard on top of Gold tables
+- Visualized:
+  - Category performance (revenue, orders)
+  - Payment completion ratios
+  - Payment failure rates
+- Enabled business-level insights from processed data
+
+![Dashboard]
+<img width="1500" height="734" alt="Screenshot 2026-04-03 at 2 59 45 AM" src="https://github.com/user-attachments/assets/afc0c4bb-b345-405f-946d-603f74d35ebd" />
+<img width="1483" height="812" alt="Screenshot 2026-04-03 at 3 00 13 AM" src="https://github.com/user-attachments/assets/6a5d99a5-c786-4a87-8eca-51cd4a06ba19" />
+
+
+### ⚙️ Workflow Orchestration
+
+- Created Databricks Workflows to automate pipeline execution
+- Orchestrated:
+  - Bronze ingestion → Silver processing → Gold processing
+- Ensured dependency-based execution across layers
+
+![Workflow](screenshots/workflow.png)
+<img width="1502" height="827" alt="Screenshot 2026-04-03 at 3 01 51 AM" src="https://github.com/user-attachments/assets/8ecd6300-a355-41a1-84bb-8aebc0efdfab" />
+
+<img width="1498" height="806" alt="Screenshot 2026-04-03 at 3 02 20 AM" src="https://github.com/user-attachments/assets/75feb074-c96b-4b59-bf98-1c56cb5942c2" />
+<img width="1498" height="824" alt="Screenshot 2026-04-03 at 3 03 11 AM" src="https://github.com/user-attachments/assets/a9967011-80c7-460a-af91-a371d7a2178a" />
+
+--
+### 🚨 Alerts & Monitoring
+
+- Configured alerts for:
+  - Failed jobs
+  - Data anomalies
+  - Pipeline execution failures
+- Enabled monitoring of pipeline health
+
+![Alerts]
+
+<img width="1157" height="631" alt="Screenshot 2026-04-03 at 3 04 02 AM" src="https://github.com/user-attachments/assets/2e9a006e-ecf4-49e3-a1e5-91e87147b6ab" />
+<img width="2234" height="1316" alt="image" src="https://github.com/user-attachments/assets/59790ca0-83b0-4d1b-aeec-45df94526005" />
+
+
+
+
+
+
 
 ## 📁 Project Structure
 novacart-case-study/

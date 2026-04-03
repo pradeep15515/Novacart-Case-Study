@@ -1,76 +1,75 @@
-# Assumptions
+# Project Overview
 
-## Data Assumptions
+## Introduction
 
-- `order_id`, `product_id`, and `payment_id` are unique identifiers
-- Source timestamps (`updated_at`, `processed_at`) are reliable for incremental processing
-- Source system does not perform hard deletes
-- Data may contain inconsistencies such as:
-  - invalid categories
-  - null values
-  - malformed price fields
+This project implements an end-to-end Lakehouse data pipeline using Databricks for an e-commerce dataset (Novacart). The pipeline processes raw transactional data (orders, products, payments) and transforms it into clean, validated, and business-ready datasets.
+
+The architecture follows the Medallion pattern (Bronze, Silver, Gold) using Delta Lake.
 
 ---
 
-## Pipeline Assumptions
+## Architecture Summary
 
-- Bronze layer is append-only
-- Incremental ingestion is based on:
-  - timestamp column
-  - primary key for tie-breaking
-- Silver layer keeps the latest record per business key
-- Gold layer recomputes only impacted records (not full reload)
-- Control tables track last successful runs
+The pipeline consists of three main layers:
 
----
+### Bronze Layer
+- Ingests data incrementally from source system (Azure SQL / external catalog)
+- Uses timestamp + primary key watermark logic
+- Stores raw data with ingestion metadata
+- Maintains ingestion control table
 
-## Data Quality Rules
+### Silver Layer
+- Cleans and standardizes data
+- Applies data validation rules
+- Separates valid and invalid data (quarantine)
+- Uses processing control table for incremental logic
 
-### Products
-- product_name must not be null
-- price must be > 0
-- category must be valid
-
-### Orders
-- customer_id must exist
-- product_id must exist
-- order_amount must be > 0
-
-### Payments
-- payment_status must not be null
-- paid_amount must be > 0
-
-Invalid records are written to quarantine tables.
+### Gold Layer
+- Builds business-ready datasets
+- Implements incremental updates based on impacted records
+- Maintains:
+  - Current state table
+  - SCD Type 2 history table
+  - Aggregated category performance metrics
 
 ---
 
-## Category Standardization
+## Key Components
 
-Only the following categories are considered valid:
-- ELECTRONICS
-- FITNESS
-- LIFESTYLE
-
-Invalid categories (e.g., ELECTRNICS) are:
-- corrected where possible
-- otherwise sent to quarantine
+- Incremental ingestion using watermark (timestamp + primary key)
+- Delta Lake MERGE operations for upserts
+- Control tables for tracking pipeline state
+- Data quality validation and quarantine handling
+- SCD Type 2 implementation for historical tracking
+- Category-level business aggregation
 
 ---
 
-## Limitations
+## Key Features
 
-- No real CDC (Change Data Capture), only timestamp-based incremental logic
-- No orchestration tool (manual execution)
-- No schema evolution handling
-- No streaming pipeline (batch only)
-- No alerting or monitoring framework
+- Idempotent pipeline design
+- Incremental processing across all layers
+- Quarantine handling for bad data
+- Late-arriving data handling using lookback window
+- Business KPI calculations (revenue, payment ratios, failure rates)
+- Snapshot exports for historical analysis
 
 ---
 
-## Future Improvements
+## Technology Stack
 
-- Implement orchestration (Databricks Workflows / Airflow)
-- Add schema evolution support
-- Introduce CDC-based ingestion
-- Add data quality framework (e.g., Great Expectations)
-- Build streaming pipeline for real-time processing
+- Databricks
+- PySpark
+- Delta Lake
+- Unity Catalog
+- SQL
+
+---
+
+## Data Flow
+
+Source → Bronze → Silver → Gold → Analytics
+
+- Bronze: Raw ingestion
+- Silver: Cleaned + validated data
+- Gold: Business-ready datasets + aggregations

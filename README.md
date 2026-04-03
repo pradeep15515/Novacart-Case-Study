@@ -50,7 +50,9 @@ Source → Bronze → Silver → Gold → Analytics
 
 ### 🔎 Bronze Control Table
 
-![Bronze Control](screenshots/bronze_control_table.png)
+![Bronze Control]
+<img width="3020" height="1644" alt="image" src="https://github.com/user-attachments/assets/b25f0985-260b-4f29-9323-83029f0a4abc" />
+
 
 ---
 

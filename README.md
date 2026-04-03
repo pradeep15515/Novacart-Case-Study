@@ -58,7 +58,7 @@ Source → Bronze → Silver → Gold → Dashboard
 Tracks incremental ingestion using watermark logic to ensure only new data is processed.
 
 ![Bronze Control](screenshots/bronze_control_tablepng.png)
-(screenshots/bronze_control_table.png)
+
 
 
 
@@ -133,7 +133,8 @@ Aggregated business metrics:
 
 Automated execution of Bronze → Silver → Gold pipelines with task dependencies.
 
-![Workflow](screenshots/workflow.png)
+![Workflow]
+<img width="1498" height="806" alt="pipeline" src="https://github.com/user-attachments/assets/782638c5-c95b-4761-b930-adaff4e335aa" />
 
 ---
 
@@ -143,7 +144,9 @@ Configured alerts for:
 - job failures
 - pipeline errors
 
-![Alerts](screenshots/alerts.png)
+![Alerts]
+
+<img width="2234" height="1316" alt="Alerts" src="https://github.com/user-attachments/assets/fb4a121f-654a-4782-add6-d12c5160de47" />
 
 ---
 
@@ -151,7 +154,7 @@ Configured alerts for:
 
 Built dashboard on top of Gold layer to visualize business metrics.
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard-1.png)
 
 ---
 

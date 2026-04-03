@@ -58,6 +58,7 @@ Tracks incremental ingestion using watermark logic to ensure only new data is pr
 
 ![Bronze Control](screenshots/bronze_control_table.png)
 
+
 ---
 
 ## 🥈 Silver Layer (Cleaning & Validation)

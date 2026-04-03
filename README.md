@@ -1,29 +1,33 @@
-# Novacart Case Study – End-to-End Lakehouse Pipeline in Databricks
+# Novacart Case Study – End-to-End Lakehouse Pipeline (Databricks)
 
-Built an end-to-end data engineering pipeline in Databricks using Bronze-Silver-Gold architecture with incremental ingestion, control tables, quarantine handling, Gold current-state merges, SCD Type 2 history tracking, and category-level aggregations.
+Built a production-style data engineering pipeline using Databricks with Bronze-Silver-Gold architecture, incremental ingestion, control tables, quarantine handling, SCD Type 2 history tracking, and business-level aggregations.
+
+Additionally implemented workflow orchestration, monitoring with alerts, and dashboards for analytics.
 
 ---
 
-## 🚀 Project Overview
+## 🔥 Key Highlights
 
-This project processes e-commerce transactional data (orders, products, payments) and transforms it into clean, validated, and business-ready datasets.
-
-The pipeline is designed using a **Medallion Architecture**:
-- **Bronze** → Raw incremental ingestion
-- **Silver** → Data cleaning, validation, quarantine
-- **Gold** → Business logic, aggregation, historical tracking
+- End-to-end Lakehouse pipeline using Databricks
+- Incremental ingestion using watermark logic (timestamp + primary key)
+- Control tables for Bronze, Silver, and Gold layers
+- Data validation and quarantine handling
+- Gold layer:
+  - Incremental impacted-record processing
+  - SCD Type 2 implementation
+  - Category-level aggregations
+- Automated pipelines using Databricks Workflows
+- Monitoring using alerts
+- Dashboard for business insights
 
 ---
 
 ## 🏗️ Architecture
 
 ![Architecture](architecture/novacart_architecture.png)
-<img width="940" height="764" alt="databricks_architecture" src="https://github.com/user-attachments/assets/34a9862a-e85d-4e08-a478-fbbd2425d229" />
 
-
-
-### Data Flow:
-Source → Bronze → Silver → Gold → Analytics
+### Flow:
+Source → Bronze → Silver → Gold → Dashboard
 
 ---
 
@@ -39,43 +43,47 @@ Source → Bronze → Silver → Gold → Analytics
 
 ## 🥉 Bronze Layer (Raw Ingestion)
 
-- Incremental ingestion from source (Azure SQL / external catalog)
+- Incremental ingestion from source system
 - Watermark logic using:
-  - Timestamp (`updated_at`, `processed_at`)
-  - Primary key (tie-breaker)
-- Metadata columns added:
+  - Timestamp columns (`updated_at`, `processed_at`)
+  - Primary key as tie-breaker
+- Metadata added:
   - `bronze_ingested_at`
   - `bronze_run_id`
 - Control table tracks ingestion state
 
 ### 🔎 Bronze Control Table
 
-![Bronze Control]
-<img width="3020" height="1644" alt="image" src="https://github.com/user-attachments/assets/b25f0985-260b-4f29-9323-83029f0a4abc" />
+Tracks incremental ingestion using watermark logic to ensure only new data is processed.
 
+![Bronze Control](screenshots/bronze_control_table.png)
 
 ---
 
 ## 🥈 Silver Layer (Cleaning & Validation)
 
-- Standardization:
-  - product_name cleaning (remove `_`, `-`)
+- Data standardization:
+  - product name cleaning
   - category normalization
-  - numeric conversions (price, amounts)
-- Data Quality Rules:
+  - numeric conversions
+- Data quality rules:
   - null checks
-  - invalid price handling
-  - invalid categories filtered
+  - invalid price detection
+  - invalid categories
 - Quarantine handling:
   - bad records stored separately
 
 ### 🔎 Silver Processing Control
 
-![Silver Control]
-<img width="2992" height="1452" alt="image" src="https://github.com/user-attachments/assets/2848624e-ffbb-4cbb-92a8-04bdbf98358e" />
+Tracks processed Bronze runs and ensures incremental Silver execution.
 
+![Silver Control](screenshots/silver_processing_control.png)
 
-### ⚠️ Quarantine Example
+---
+
+### ⚠️ Quarantine Handling
+
+Invalid records are isolated for further review instead of polluting clean datasets.
 
 ![Quarantine](screenshots/quarantine_examples.png)
 
@@ -85,14 +93,18 @@ Source → Bronze → Silver → Gold → Analytics
 
 ### Features:
 - Incremental processing using impacted records
-- Multi-table joins:
-  - orders + products + payments
+- Joins across:
+  - orders
+  - products
+  - payments
 - Business metrics:
-  - payment ratios
-  - payment states
-- Category-level aggregation
+  - payment completion ratio
+  - payment state classification
+- Final analytical dataset
 
 ### 🔎 Orders Information Table
+
+Final curated dataset combining all entities for analytics.
 
 ![Gold Orders](screenshots/gold_orders_information.png)
 
@@ -107,9 +119,35 @@ Aggregated business metrics:
 - Payment completion ratio
 - Payment failure rate
 
-![Category Performance]
-<img width="2984" height="1624" alt="image" src="https://github.com/user-attachments/assets/c8df4f3d-83fb-469c-b33e-8d0d53368a9f" />
+![Category Performance](screenshots/category_performance.png)
 
+---
+
+## ⚙️ Orchestration & Monitoring
+
+### 🔄 Databricks Workflows
+
+Automated execution of Bronze → Silver → Gold pipelines with task dependencies.
+
+![Workflow](screenshots/workflow.png)
+
+---
+
+### 🚨 Alerts
+
+Configured alerts for:
+- job failures
+- pipeline errors
+
+![Alerts](screenshots/alerts.png)
+
+---
+
+### 📈 Dashboard
+
+Built dashboard on top of Gold layer to visualize business metrics.
+
+![Dashboard](screenshots/dashboard.png)
 
 ---
 
@@ -122,7 +160,7 @@ Maintains historical changes:
 
 Tracks changes in:
 - order status
-- product details
+- product data
 - payment updates
 
 ---
@@ -130,67 +168,31 @@ Tracks changes in:
 ## 🔄 Incremental Processing Design
 
 - Bronze → watermark-based ingestion
-- Silver → incremental read using control table
+- Silver → incremental processing using control table
 - Gold → impacted-record-based processing
 - Idempotent pipeline (safe re-runs)
 
 ---
-## 📊 Additional Implementations
 
-### 📈 Dashboard (Analytics Layer)
+## 📈 Business Value
 
-- Built dashboard on top of Gold tables
-- Visualized:
-  - Category performance (revenue, orders)
-  - Payment completion ratios
-  - Payment failure rates
-- Enabled business-level insights from processed data
+- Enables category-level revenue analysis
+- Identifies failed and incomplete payments
+- Provides payment performance insights
+- Supports historical tracking of changes
+- Improves data reliability for analytics
 
-![Dashboard]
-<img width="1500" height="734" alt="Screenshot 2026-04-03 at 2 59 45 AM" src="https://github.com/user-attachments/assets/afc0c4bb-b345-405f-946d-603f74d35ebd" />
-<img width="1483" height="812" alt="Screenshot 2026-04-03 at 3 00 13 AM" src="https://github.com/user-attachments/assets/6a5d99a5-c786-4a87-8eca-51cd4a06ba19" />
-
-
-### ⚙️ Workflow Orchestration
-
-- Created Databricks Workflows to automate pipeline execution
-- Orchestrated:
-  - Bronze ingestion → Silver processing → Gold processing
-- Ensured dependency-based execution across layers
-
-![Workflow](screenshots/workflow.png)
-<img width="1502" height="827" alt="Screenshot 2026-04-03 at 3 01 51 AM" src="https://github.com/user-attachments/assets/8ecd6300-a355-41a1-84bb-8aebc0efdfab" />
-
-<img width="1498" height="806" alt="Screenshot 2026-04-03 at 3 02 20 AM" src="https://github.com/user-attachments/assets/75feb074-c96b-4b59-bf98-1c56cb5942c2" />
-<img width="1498" height="824" alt="Screenshot 2026-04-03 at 3 03 11 AM" src="https://github.com/user-attachments/assets/a9967011-80c7-460a-af91-a371d7a2178a" />
-
---
-### 🚨 Alerts & Monitoring
-
-- Configured alerts for:
-  - Failed jobs
-  - Data anomalies
-  - Pipeline execution failures
-- Enabled monitoring of pipeline health
-
-![Alerts]
-
-<img width="1157" height="631" alt="Screenshot 2026-04-03 at 3 04 02 AM" src="https://github.com/user-attachments/assets/2e9a006e-ecf4-49e3-a1e5-91e87147b6ab" />
-<img width="2234" height="1316" alt="image" src="https://github.com/user-attachments/assets/59790ca0-83b0-4d1b-aeec-45df94526005" />
-
-
-
-
-
-
+---
 
 ## 📁 Project Structure
-novacart-case-study/
+
+--
+Novacart-Case-Study/
 │
 ├── notebooks/
-│   ├── 01_bronze_ingestion.py
-│   ├── 02_silver_processing.py
-│   └── 03_gold_processing.py
+│   ├── bronze_ingestion.py
+│   ├── silver_processing.py
+│   └── gold_processing.py
 │
 ├── docs/
 │   ├── project_overview.md
@@ -202,9 +204,13 @@ novacart-case-study/
 │   ├── silver_processing_control.png
 │   ├── gold_orders_information.png
 │   ├── category_performance.png
-│   └── quarantine_examples.png
+│   ├── quarantine_examples.png
+│   ├── dashboard.png
+│   ├── workflow.png
+│   └── alerts.png
 │
 └── README.md
+--
 
 ---
 
@@ -214,47 +220,45 @@ novacart-case-study/
 2. Run Bronze ingestion notebook
 3. Run Silver processing notebook
 4. Run Gold processing notebook
-5. Validate using SQL queries
+5. Validate outputs using SQL queries
 
 ---
 
 ## ⚠️ Assumptions
 
-- Source data uses reliable timestamps
-- No hard deletes in source system
-- Categories limited to:
+- Source data contains reliable timestamps
+- No delete operations (only inserts/updates)
+- Categories restricted to:
   - ELECTRONICS
   - FITNESS
   - LIFESTYLE
-- Invalid records routed to quarantine
+- Invalid records are quarantined
 
 ---
 
 ## 🚧 Limitations
 
-- No real CDC (timestamp-based only)
-- No orchestration (manual execution)
+- No CDC implementation (timestamp-based only)
+- No orchestration outside Databricks
 - No streaming pipeline
-- No monitoring/alerting framework
+- Limited monitoring framework
 
 ---
 
 ## 🔮 Future Improvements
 
-- Add Databricks Workflows / Airflow orchestration
-- Implement CDC ingestion
+- Add Airflow / external orchestration
+- Implement CDC-based ingestion
 - Add data quality framework (Great Expectations)
-- Add streaming (Kafka / Event Hub)
-- Schema evolution handling
+- Introduce streaming pipelines
+- Handle schema evolution
 
 ---
 
 ## 💡 Key Takeaways
 
-- Built a production-style data pipeline using Delta Lake
-- Implemented incremental ingestion and control tables
-- Designed data quality and quarantine strategy
-- Developed SCD Type 2 history tracking
-- Delivered business-ready aggregated datasets
-
----
+- Built production-style data pipeline using Delta Lake
+- Implemented incremental ingestion with control tables
+- Designed robust data quality checks and quarantine system
+- Developed SCD Type 2 historical tracking
+- Delivered business-ready analytical datasets

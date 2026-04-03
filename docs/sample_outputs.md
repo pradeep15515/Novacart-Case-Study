@@ -36,7 +36,9 @@ Examples:
 - invalid price
 - unknown category
 
-![Quarantine Example](../screenshots/quarantine_examples.png)
+![Quarantine Example]
+<img width="2104" height="1072" alt="image" src="https://github.com/user-attachments/assets/319f9a2a-c213-43e4-9d48-2d1fc186bd22" />
+
 
 ---
 
@@ -47,7 +49,10 @@ Examples:
 - Joined dataset from orders, products, payments
 - Contains business-ready fields
 
-![Gold Orders](../screenshots/gold_orders_information.png)
+![Gold Orders]
+<img width="2092" height="960" alt="image" src="https://github.com/user-attachments/assets/eb968ff0-239d-468b-ab61-ce36b796ca77" />
+<img width="2092" height="972" alt="image" src="https://github.com/user-attachments/assets/de984f3b-a290-477b-ae7f-f91818448228" />
+
 
 ---
 
@@ -69,7 +74,9 @@ Aggregated metrics:
 - avg_payment_completion_ratio
 - payment_failure_rate
 
-![Category Performance](../screenshots/category_performance.png)
+![Category Performance]
+<img width="2104" height="754" alt="image" src="https://github.com/user-attachments/assets/9338b10e-5393-4b26-bc32-2475c1430d69" />
+
 
 ---
 

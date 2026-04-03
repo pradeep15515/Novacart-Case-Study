@@ -193,7 +193,9 @@ Tracks changes in:
 
 ## 📁 Project Structure
 
+
 --
+
 Novacart-Case-Study/
 │
 ├── notebooks/
@@ -217,7 +219,6 @@ Novacart-Case-Study/
 │   └── alerts.png
 │
 └── README.md
---
 
 ---
 

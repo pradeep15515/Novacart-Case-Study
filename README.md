@@ -107,7 +107,9 @@ Aggregated business metrics:
 - Payment completion ratio
 - Payment failure rate
 
-![Category Performance](screenshots/category_performance.png)
+![Category Performance]
+<img width="2984" height="1624" alt="image" src="https://github.com/user-attachments/assets/c8df4f3d-83fb-469c-b33e-8d0d53368a9f" />
+
 
 ---
 

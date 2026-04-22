@@ -63,7 +63,6 @@ Invalid categories (e.g., ELECTRNICS) are:
 - No orchestration tool (manual execution)
 - No schema evolution handling
 - No streaming pipeline (batch only)
-- No alerting or monitoring framework
 
 ---
 
